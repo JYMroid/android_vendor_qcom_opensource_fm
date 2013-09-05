@@ -1,0 +1,23 @@
+To build, the following patches needs to be applied:
+
+http://review.cyanogenmod.org/49752
+http://review.cyanogenmod.org/49760
+http://review.cyanogenmod.org/50031
+http://review.cyanogenmod.org/50032
+
+Then add to BoardConfig.mk:
+
+COMMON_GLOBAL_CFLAGS += -DQCOM_FM_ENABLED -DQCOM_NEW_FM
+QCOM_FM_ENABLED := true
+
+And add to device.mk or similar:
+
+PRODUCT_PACKAGES += \
+    qcom.fmradio \
+    libqcomfm_jni \
+    FM2 \
+    FMRecord
+
+Finally add to init.qcom.rc:
+
+export BOOTCLASSPATH ${BOOTCLASSPATH}:/system/framework/qcom.fmradio.jar
